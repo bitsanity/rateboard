@@ -67,7 +67,6 @@ class KrakenRatesModellet(Modellet):
   def __init__(self, targetCurr):
     super(KrakenRatesModellet, self).__init__()
     self.p_targetCurr = targetCurr
-    self.p_targetCurr = targetCurr
     self.p_refreshTime = None
     self.p_ask = '000.00'
     self.p_bid = '000.00'
@@ -101,8 +100,7 @@ class KrakenRatesModellet(Modellet):
     result = '%.4f' % pct
     if lf >= of:
       result = '+' + result
-    else:
-      result = '-' + result
+
     return result + '%'
 
   def doRefresh(self):

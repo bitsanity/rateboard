@@ -8,6 +8,7 @@ from PyQt4 import QtGui,QtCore
 from boardlet import Boardlet
 from clockboardlet import ClockBoardlet
 from forexticker import ForexTicker
+from goldticker import GoldTicker
 from coindeskbpiticker import CoindeskBPITicker
 from krakenticker import KrakenTicker
 from bitstampticker import BitstampTicker
@@ -67,17 +68,18 @@ class MainWindow(QtGui.QWidget):
 
     btcch = BTCChinaTicker(self)
 
-    bpcad = BitpayTicker(self, 'CAD')
-    bpusd = BitpayTicker(self, 'USD')
+    krcad = KrakenTicker(self, 'CAD')
+
+    xauusd = GoldTicker(self)
     bpgbp = BitpayTicker(self, 'GBP')
     bpeur = BitpayTicker(self, 'EUR')
 
     self.p_boardlets = [ \
-      [ van,            nyt,            lot,            frk,            bet            ] ,
-      [ usdcad,         kr_usd,         usdgbp,         usdeur,         usdcny         ] ,
-      [ qu_ca,          qu_us,          cd_gbp,         cd_eur,         cd_cny         ] ,
-      [ cbcad,          cbusd,          cbgbp,          cbeur,          btcch          ] ,
-      [ bpcad,          bpusd,          bpgbp,          bpeur,          btstmp         ] ]
+      [ van,    nyt,    lot,    frk,    bet    ] ,
+      [ usdcad, kr_usd, usdgbp, usdeur, usdcny ] ,
+      [ qu_ca,  qu_us,  cd_gbp, cd_eur, cd_cny ] ,
+      [ cbcad,  cbusd,  cbgbp,  cbeur,  btcch  ] ,
+      [ krcad,  xauusd, bpgbp,  bpeur,  btstmp ] ]
 
     grid = QtGui.QGridLayout()
 

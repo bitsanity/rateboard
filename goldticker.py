@@ -33,6 +33,9 @@ class GoldTicker(Boardlet):
   def paintEvent(self, e):
     super(GoldTicker, self).paintEvent(e)
 
+    if None == self.p_model.getData():
+      return
+
     try:
       pixmap = QtGui.QPixmap()
       pixmap.loadFromData( self.p_model.getData() )
@@ -41,7 +44,7 @@ class GoldTicker(Boardlet):
 
       qp = QtGui.QPainter()
       qp.begin(self)
-      qp.drawPixmap( 100, 20, pixmap )
+      qp.drawPixmap( 99, 19, pixmap )
       qp.end()
     except Exception:
       exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -51,9 +54,9 @@ class GoldTicker(Boardlet):
   def periodicUpdate(self):
     while(True):
       st = self.getNextWaitTimeSeconds()
-      time.sleep( st )
       self.p_model.doRefresh()
       self.update()
+      time.sleep( st )
 
 class GoldRate(Modellet):
   def __init__(self):
