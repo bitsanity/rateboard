@@ -77,7 +77,6 @@ class ForexTicker(Boardlet):
       st = self.getNextWaitTimeSeconds()
       time.sleep( st )
       self.p_model.doRefresh()
-      self.update()
 
 class ForexRate(Modellet):
   def __init__(self, currPair=None):  # e.g. 'USDEUR'

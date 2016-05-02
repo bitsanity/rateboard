@@ -60,7 +60,6 @@ class CoindeskBPITicker(Boardlet):
       st = self.getNextWaitTimeSeconds()
       time.sleep( st )
       self.p_model.doRefresh()
-      self.update()
 
 class CoindeskBPI(Modellet):
   def __init__(self, targetCurr='EUR'):

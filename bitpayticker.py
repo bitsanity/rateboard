@@ -58,7 +58,6 @@ class BitpayTicker(Boardlet):
       st = self.getNextWaitTimeSeconds()
       time.sleep( st )
       self.p_model.doRefresh()
-      self.update()
 
 class BitpayModellet(Modellet):
   def __init__(self, targetCurr=None):

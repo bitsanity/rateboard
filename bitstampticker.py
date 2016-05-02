@@ -57,7 +57,6 @@ class BitstampTicker(Boardlet):
       st = self.getNextWaitTimeSeconds()
       time.sleep( st )
       self.p_model.doRefresh()
-      self.update()
 
 # Bitstamp gives bid/ask for BTCUSD and buy/sell for EURUSD
 class BitstampModellet(Modellet):

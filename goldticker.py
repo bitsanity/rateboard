@@ -55,7 +55,6 @@ class GoldTicker(Boardlet):
     while(True):
       st = self.getNextWaitTimeSeconds()
       self.p_model.doRefresh()
-      self.update()
       time.sleep( st )
 
 class GoldRate(Modellet):

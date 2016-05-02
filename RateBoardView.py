@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import datetime
 import os
 import sys
+
 from PyQt4 import QtGui,QtCore
 
 from boardlet import Boardlet
@@ -29,7 +31,8 @@ class MainWindow(QtGui.QWidget):
     self.initUI()
 
   def initUI(self):
-    self.setWindowTitle('Rate Board')
+    self.setWindowTitle( 'Rate Board - ' +
+                         datetime.datetime.now().strftime("%d %b %H:%M") )
 
     rootWinRect = QtGui.QApplication.desktop().availableGeometry()
     pal = QtGui.QPalette()
@@ -90,7 +93,17 @@ class MainWindow(QtGui.QWidget):
     self.setLayout( grid )
     self.showMaximized()
 
+    # set up a timer to do a repaint every so often from the ui thread
+    # not from a worker thread
+    self.startTimer( 30 * 1000 ) # 30 seconds, in msec
+
   def keyPressEvent(self, e):
     if e.key() == QtCore.Qt.Key_Escape or e.key() == QtCore.Qt.Key_Q:
       self.close()
+
+    if e.key() == QtCore.Qt.Key_R:
+      self.update()
+
+  def timerEvent(self, e):
+    self.update()
 

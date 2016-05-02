@@ -22,10 +22,6 @@ class ClockBoardlet(Boardlet):
     self.p_icon.setGeometry(20,20,60,60)
     self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/worldclock.png') )
 
-    t = threading.Thread(target=self.updateTime)
-    t.setDaemon(True)
-    t.start()
-
   def paintEvent(self, e):
     super(ClockBoardlet, self).paintEvent(e)
 
@@ -66,11 +62,6 @@ class ClockBoardlet(Boardlet):
     qp.drawText( 85, 79, tz )
 
     qp.end()
-
-  def updateTime(self):
-    while(True):
-      time.sleep(30) # seconds
-      self.update()
 
 # ------------------------------------------------------------------------------------------
 # Following are timezone classes - Python does not provide default implementation for tzinfo
