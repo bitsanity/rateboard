@@ -3,7 +3,6 @@
 
 import os
 from PyQt4 import QtGui,QtCore
-import threading
 
 import datetime
 import time

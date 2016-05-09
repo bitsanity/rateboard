@@ -3,6 +3,7 @@
 
 import datetime
 import os
+import random
 import sys
 
 from PyQt4 import QtGui,QtCore
@@ -31,16 +32,22 @@ class MainWindow(QtGui.QWidget):
     self.initUI()
 
   def initUI(self):
+    # custom list of color names for different background gradients
+    self.p_colorIndex = 0
+    self.p_colors = [ QtGui.QColor("red"),
+                      QtGui.QColor("darkRed"),
+                      QtGui.QColor("green"),
+                      QtGui.QColor("darkGreen"),
+                      QtGui.QColor("blue"),
+                      QtGui.QColor("darkBlue"),
+                      QtGui.QColor("cyan"),
+                      QtGui.QColor("darkCyan"),
+                      QtGui.QColor("darkMagenta"),
+                      QtGui.QColor(153,153,0),
+                      QtGui.QColor(51,51,0) ]
+
     self.setWindowTitle( 'Rate Board - ' +
                          datetime.datetime.now().strftime("%d %b %H:%M") )
-
-    rootWinRect = QtGui.QApplication.desktop().availableGeometry()
-    pal = QtGui.QPalette()
-    gradient = QtGui.QLinearGradient(0, 0, 0, rootWinRect.height())
-    gradient.setColorAt(0.0, QtGui.QColor(0, 0, 0))
-    gradient.setColorAt(1.0, QtGui.QColor(0, 0, 255))
-    pal.setBrush(QtGui.QPalette.Window, QtGui.QBrush(gradient))
-    self.setPalette( pal )
 
     van = ClockBoardlet(self, 'Vancouver')
     nyt = ClockBoardlet(self, 'New York')
@@ -94,7 +101,6 @@ class MainWindow(QtGui.QWidget):
     self.showMaximized()
 
     # set up a timer to do a repaint every so often from the ui thread
-    # not from a worker thread
     self.startTimer( 30 * 1000 ) # 30 seconds, in msec
 
   def keyPressEvent(self, e):
@@ -102,8 +108,27 @@ class MainWindow(QtGui.QWidget):
       self.close()
 
     if e.key() == QtCore.Qt.Key_R:
+      # force background update for testing
+      self.makeBackground()
       self.update()
 
   def timerEvent(self, e):
-    self.update()
+    # only make a new background on average every 20th timeout
+    if random.random() < 0.05:
+      self.makeBackground()
+      self.update()
+
+  def makeBackground(self):
+    nextColor = self.p_colors[self.p_colorIndex]
+    if self.p_colorIndex < len(self.p_colors) - 1:
+      self.p_colorIndex = self.p_colorIndex + 1
+    else:
+      self.p_colorIndex = 0
+
+    pal = QtGui.QPalette()
+    gradient = QtGui.QLinearGradient(0, 0, 0, self.frameGeometry().height())
+    gradient.setColorAt(0.0, QtGui.QColor(0, 0, 0))
+    gradient.setColorAt(1.0, nextColor)
+    pal.setBrush(QtGui.QPalette.Window, QtGui.QBrush(gradient))
+    self.setPalette( pal )
 
