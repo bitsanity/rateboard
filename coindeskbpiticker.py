@@ -23,8 +23,9 @@ class CoindeskBPITicker(Boardlet):
   def initUI(self):
     super(CoindeskBPITicker, self).initUI()
     self.p_icon = QtGui.QLabel(self)
-    self.p_icon.setGeometry(20,20,60,60)
-    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + "/coindesk.png" ) )
+    self.p_icon.setGeometry( self.b_imgx(), self.b_imgy(),
+                             self.b_iconwidth(),self.b_iconheight() )
+    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + "/img/coindesk.png" ) )
 
     t = threading.Thread(target=self.periodicUpdate)
     t.setDaemon(True)
@@ -37,21 +38,25 @@ class CoindeskBPITicker(Boardlet):
     qp.begin(self)
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( 85, 32, 'Coindesk BPI' )
+    qp.drawText( self.b_col1x(), self.b_row1y(), 'Coindesk BPI' )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
-    qp.drawText( 85, 55, self.p_model.getTargetPrice() )
+    qp.drawText( self.b_col1x(), self.b_row2y() - 5,
+                 self.p_model.getTargetPrice() )
     qp.setFont( self.p_pairFont )
-    qp.drawText( 175, 54, self.p_model.getTargetCurr() )
+    qp.drawText( self.b_col2x(), self.b_row2y() - 5,
+                 self.p_model.getTargetCurr() )
     qp.setFont( self.p_normFont )
-    qp.drawText( 85, 76, self.p_model.getUSDPrice() )
+    qp.drawText( self.b_col1x(), self.b_row3y() - 5,
+                 self.p_model.getUSDPrice() )
     qp.setFont( self.p_pairFont )
-    qp.drawText( 175, 75, 'USD' )
+    qp.drawText( self.b_col2x(), self.b_row3y() - 5, 'USD' )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )
-    qp.drawText( 20, 94, 'Refreshed: ' + self.p_model.getLastUpdated() )
+    qp.drawText( self.b_imgx(), self.b_row4y(),
+                 'Refreshed: ' + self.p_model.getLastUpdated() )
 
     qp.end()
 

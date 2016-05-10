@@ -5,7 +5,7 @@ class Boardlet(QtGui.QWidget):
   def __init__(self, parent):
     super(Boardlet, self).__init__(parent)
 
-    # define fonts and pens here, once, for consistent style throughout subclasses
+    # define fonts and pens once, for consistent style throughout subclasses
     self.p_grayPen = QtGui.QPen(QtCore.Qt.gray, 1, QtCore.Qt.SolidLine)
     self.p_blackPen = QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine)
     self.p_whitePen = QtGui.QPen( QtCore.Qt.white, 1, QtCore.Qt.SolidLine )
@@ -18,9 +18,45 @@ class Boardlet(QtGui.QWidget):
     self.p_timeFont = QtGui.QFont('Helvetica', 8)
     self.initUI()
 
+  def b_iconwidth(self):
+    return 60
+
+  def b_iconheight(self):
+    return 60
+
+  def b_width(self):
+    return 275
+
+  def b_height(self):
+    return 120
+
+  def b_imgx(self):
+    return 10
+
+  def b_imgy(self):
+    return 10
+
+  def b_col1x(self):
+    return 75
+
+  def b_col2x(self):
+    return 165
+
+  def b_row1y(self):
+    return self.b_imgy() + 15
+
+  def b_row2y(self):
+    return self.b_imgy() + 45
+
+  def b_row3y(self):
+    return self.b_imgy() + 65
+
+  def b_row4y(self):
+    return self.b_imgy() + 80
+
   def initUI(self):
-    self.setMinimumSize(300, 120)
-    self.setMaximumSize(300, 120)
+    self.setMinimumSize(self.b_width(), self.b_height())
+    self.setMaximumSize(self.b_width(), self.b_height())
 
   def paintEvent(self, e):
     size = self.size()

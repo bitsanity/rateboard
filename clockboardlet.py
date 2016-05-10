@@ -18,8 +18,9 @@ class ClockBoardlet(Boardlet):
   def initUI(self):
     super(ClockBoardlet, self).initUI()
     self.p_icon = QtGui.QLabel(self)
-    self.p_icon.setGeometry(20,20,60,60)
-    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/worldclock.png') )
+    self.p_icon.setGeometry( self.b_imgx(), self.b_imgy(),
+                             self.b_iconwidth(),self.b_iconheight() )
+    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/worldclock.png') )
 
   def paintEvent(self, e):
     super(ClockBoardlet, self).paintEvent(e)
@@ -49,16 +50,17 @@ class ClockBoardlet(Boardlet):
 
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( 85, 32, self.p_city )
+    qp.drawText( self.b_col1x(), self.b_row1y(), self.p_city )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_rateFont )
-    qp.drawText( 85, 60, tnow )
+    qp.drawText( self.b_col1x(), self.b_row2y(), tnow )
 
     qp.setFont( self.p_pairFont )
-    qp.drawText( 175, 60, fday )
+    qp.drawText( self.b_col2x(), self.b_row2y(), fday )
+
     qp.setPen( self.p_grayPen )
-    qp.drawText( 85, 79, tz )
+    qp.drawText( self.b_col1x(), self.b_row3y(), tz )
 
     qp.end()
 

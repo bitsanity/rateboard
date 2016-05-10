@@ -26,8 +26,8 @@ class BitpayTicker(Boardlet):
     super(BitpayTicker, self).initUI()
 
     self.p_icon = QtGui.QLabel(self)
-    self.p_icon.setGeometry(20,20,56,56)
-    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + "/bitpay.png" ) )
+    self.p_icon.setGeometry(self.b_imgx(),self.b_imgy(),56,56)
+    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + "/img/bitpay.png" ) )
 
     t = threading.Thread(target=self.periodicUpdate)
     t.setDaemon(True)
@@ -41,15 +41,17 @@ class BitpayTicker(Boardlet):
 
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( 85, 32, 'Bitpay BTC' + self.p_model.getCurrPair() )
+    qp.drawText( self.b_col1x(), self.b_row1y(),
+                 'Bitpay BTC' + self.p_model.getCurrPair() )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_rateFont )
-    qp.drawText( 85, 60, self.p_model.getRate() )
+    qp.drawText( self.b_col1x(), self.b_row2y(), self.p_model.getRate() )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )
-    qp.drawText( 20, 90, 'Refreshed: ' + self.p_model.getLastUpdated() )
+    qp.drawText( self.b_imgx(), self.b_row4y(),
+                 'Refreshed: ' + self.p_model.getLastUpdated() )
 
     qp.end()
 

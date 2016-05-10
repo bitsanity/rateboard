@@ -23,8 +23,9 @@ class GoldTicker(Boardlet):
     super(GoldTicker, self).initUI()
 
     self.p_icon = QtGui.QLabel(self)
-    self.p_icon.setGeometry(20,20,60,60)
-    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/gold.png' ) )
+    self.p_icon.setGeometry( self.b_imgx(), self.b_imgy(),
+                             self.b_iconwidth(),self.b_iconheight() )
+    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/gold.png' ) )
 
     t = threading.Thread(target=self.periodicUpdate)
     t.setDaemon(True)
@@ -44,7 +45,7 @@ class GoldTicker(Boardlet):
 
       qp = QtGui.QPainter()
       qp.begin(self)
-      qp.drawPixmap( 99, 19, pixmap )
+      qp.drawPixmap( self.b_col1x(), self.b_imgy(), pixmap )
       qp.end()
     except Exception:
       exc_type, exc_value, exc_traceback = sys.exc_info()

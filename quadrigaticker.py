@@ -23,8 +23,9 @@ class QuadrigaTicker(Boardlet):
   def initUI(self):
     super(QuadrigaTicker, self).initUI()
     self.p_icon = QtGui.QLabel(self)
-    self.p_icon.setGeometry(20,20,60,60)
-    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + "/quadriga.png" ) )
+    self.p_icon.setGeometry( self.b_imgx(), self.b_imgy(),
+                             self.b_iconwidth(),self.b_iconheight() )
+    self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + "/img/quadriga.png" ) )
 
     t = threading.Thread(target=self.periodicUpdate)
     t.setDaemon(True)
@@ -37,17 +38,20 @@ class QuadrigaTicker(Boardlet):
     qp.begin(self)
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( 85, 32, 'Quadriga BTC' + self.p_model.getTargetCurr() )
+    qp.drawText( self.b_col1x(), self.b_row1y(),
+                 'Quadriga BTC' + self.p_model.getTargetCurr() )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
-    qp.drawText( 85, 55, 'bid: ' + self.p_model.getBid() )
-    qp.drawText( 85, 75, 'ask: ' + self.p_model.getAsk() )
+    qp.drawText( self.b_col1x(), self.b_row2y() - 5,
+                 'bid: ' + self.p_model.getBid() )
+    qp.drawText( self.b_col1x(), self.b_row3y() - 5,
+                 'ask: ' + self.p_model.getAsk() )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )
-    qp.drawText( 20, 94, 'Refreshed: ' + self.p_model.getLastUpdated() )
-
+    qp.drawText( self.b_imgx(), self.b_row4y(),
+                 'Refreshed: ' + self.p_model.getLastUpdated() )
     qp.end()
 
   def periodicUpdate(self):

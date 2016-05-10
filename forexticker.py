@@ -23,18 +23,19 @@ class ForexTicker(Boardlet):
     super(ForexTicker, self).initUI()
 
     self.p_icon = QtGui.QLabel(self)
-    self.p_icon.setGeometry(20,20,60,60)
+    self.p_icon.setGeometry( self.b_imgx(), self.b_imgy(),
+                             self.b_iconwidth(),self.b_iconheight() )
 
     if 'CAD' in self.p_model.getCurrPair():
-      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/cad.png' ) )
+      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/cad.png' ) )
     elif 'GBP' in self.p_model.getCurrPair():
-      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/gbp.png' ) )
+      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/gbp.png' ) )
     elif 'EUR' in self.p_model.getCurrPair():
-      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/eur.png' ) )
+      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/eur.png' ) )
     elif 'CNY' in self.p_model.getCurrPair():
-      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/cny.png' ) )
+      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/cny.png' ) )
     else:
-      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + "/globe.png" ) )
+      self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/globe.png' ) )
 
     t = threading.Thread(target=self.periodicUpdate)
     t.setDaemon(True)
@@ -48,16 +49,17 @@ class ForexTicker(Boardlet):
 
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( 85, 32, self.p_model.getCurrPair() )
-    qp.drawText( 190, 32, 'Inverse' )
+    qp.drawText( self.b_col1x(), self.b_row1y(), self.p_model.getCurrPair() )
+    qp.drawText( self.b_col2x() + 15, self.b_row1y(), 'Inverse' )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_rateFont )
 
     rt = self.p_model.getRate()
-    qp.drawText( 85, 60, rt )
+    qp.drawText( self.b_col1x(), self.b_row2y(), rt )
+
     qp.setFont( self.p_pairFont )
-    qp.drawText( 190, 60, self.inverseOf(rt) )
+    qp.drawText( self.b_col2x() + 15, self.b_row2y(), self.inverseOf(rt) )
 
     qp.setFont( self.p_timeFont )
     ch = self.p_model.getChange()
@@ -65,10 +67,11 @@ class ForexTicker(Boardlet):
       qp.setPen( self.p_redPen )
     else:
       qp.setPen( self.p_greenPen )
-    qp.drawText( 85, 76, ch )
+    qp.drawText( self.b_col1x(), self.b_row3y() - 3, ch )
 
     qp.setPen( self.p_grayPen )
-    qp.drawText( 20, 91, 'Refreshed: ' + self.p_model.getLastUpdated() )
+    qp.drawText( self.b_imgx(), self.b_row4y(),
+                 'Refreshed: ' + self.p_model.getLastUpdated() )
 
     qp.end()
 
@@ -83,7 +86,7 @@ class ForexRate(Modellet):
     super(ForexRate, self).__init__()
 
     self.p_currPair = currPair
-    self.p_rate = '000.0000'
+    self.p_rate = '0.0000'
     self.p_change = '+00.00%'
 
   def getRate(self):
