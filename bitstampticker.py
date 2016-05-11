@@ -38,17 +38,17 @@ class BitstampTicker(Boardlet):
 
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col1x(), self.b_row1y(), 'Bitstamp' )
+    qp.drawText( self.b_col1x(), self.b_row1y(), 'Bitstamp (USD:x)' )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col1x(), self.b_row2y() - 5, 'BTCUSD:' )
-    qp.drawText( self.b_col1x(), self.b_row3y() - 5, 'EURUSD:' )
+    qp.drawText( self.b_col1x(), self.b_row2y() - 5, 'BTC:' )
+    qp.drawText( self.b_col1x(), self.b_row3y() - 5, 'EUR:' )
 
     qp.setFont( self.p_normFont )
-    qp.drawText( self.b_col2x() - 10, self.b_row2y() - 5,
+    qp.drawText( self.b_col2x() - 45, self.b_row2y() - 5,
                  self.p_model.getBid() + '/' + self.p_model.getAsk() )
-    qp.drawText( self.b_col2x() - 10, self.b_row3y() - 5,
+    qp.drawText( self.b_col2x() - 45, self.b_row3y() - 5,
                  self.p_model.getBuy() + '/' + self.p_model.getSell() )
 
     qp.setFont( self.p_timeFont )

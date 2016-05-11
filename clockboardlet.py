@@ -57,10 +57,10 @@ class ClockBoardlet(Boardlet):
     qp.drawText( self.b_col1x(), self.b_row2y(), tnow )
 
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col2x(), self.b_row2y(), fday )
+    qp.drawText( self.b_col2x(), self.b_row2y(), tz )
 
     qp.setPen( self.p_grayPen )
-    qp.drawText( self.b_col1x(), self.b_row3y(), tz )
+    qp.drawText( self.b_col1x(), self.b_row3y(), fday )
 
     qp.end()
 

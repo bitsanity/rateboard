@@ -116,7 +116,8 @@ class MainWindow(QtGui.QWidget):
     # only make a new background on average every 20th timeout
     if random.random() < 0.05:
       self.makeBackground()
-      self.update()
+
+    self.repaint()
 
   def makeBackground(self):
     nextColor = self.p_colors[self.p_colorIndex]

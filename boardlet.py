@@ -25,7 +25,7 @@ class Boardlet(QtGui.QWidget):
     return 60
 
   def b_width(self):
-    return 275
+    return 245
 
   def b_height(self):
     return 120
