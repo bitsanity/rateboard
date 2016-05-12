@@ -73,6 +73,9 @@ class Coinbase(Modellet):
   def getBestAsk(self):
     return self.p_bestAsk
 
+  def getAsk(self):
+    return self.p_bestAsk
+
   def getTargetCurr(self):
     return self.p_targetCurr
 

@@ -20,6 +20,7 @@ from coinbaseticker import CoinbaseTicker
 from btcchinaticker import BTCChinaTicker
 from bitpayticker import BitpayTicker
 from quadrigaticker import QuadrigaTicker
+from myticker import MyTicker
 
 def go():
   app = QtGui.QApplication(sys.argv)
@@ -66,10 +67,8 @@ class MainWindow(QtGui.QWidget):
     cd_cny = CoindeskBPITicker(self, 'CNY')
 
     kr_usd = KrakenTicker(self, 'USD')
-    qu_us = QuadrigaTicker( self, 'USD' )
     qu_ca = QuadrigaTicker( self, 'CAD' )
     btstmp = BitstampTicker( self )
-    #cexio = CEXIOTicker( self ) 403 Forbidden
 
     cbcad = CoinbaseTicker(self, 'CAD')
     cbusd = CoinbaseTicker(self, 'USD')
@@ -84,10 +83,12 @@ class MainWindow(QtGui.QWidget):
     bpgbp = BitpayTicker(self, 'GBP')
     bpeur = BitpayTicker(self, 'EUR')
 
+    my_us = MyTicker(self, kr_usd.p_model, cbusd.p_model )
+
     self.p_boardlets = [ \
       [ van,    nyt,    lot,    frk,    bet    ] ,
       [ usdcad, kr_usd, usdgbp, usdeur, usdcny ] ,
-      [ qu_ca,  qu_us,  cd_gbp, cd_eur, cd_cny ] ,
+      [ qu_ca,  my_us,  cd_gbp, cd_eur, cd_cny ] ,
       [ cbcad,  cbusd,  cbgbp,  cbeur,  btcch  ] ,
       [ krcad,  xauusd, bpgbp,  bpeur,  btstmp ] ]
 
