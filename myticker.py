@@ -35,7 +35,7 @@ class MyTicker(Boardlet):
     qp.begin(self)
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col1x(), self.b_row1y(), 'My Rates (USD)' )
+    qp.drawText( self.b_col1x(), self.b_row1y(), 'My Prices (USD)' )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
@@ -72,8 +72,9 @@ class MyModel(Modellet):
 
   def doRefresh(self):
     try:
-      self.p_buy = "%.2f" % (float(self.p_bidobj.getBid()) * 0.98)
-      self.p_sell = "%.2f" % (float(self.p_askobj.getAsk()) * 1.02)
+      # calc and apply 1.5% spread to retrieve fee
+      self.p_buy = "%.2f" % (float(self.p_bidobj.getBid()) * 0.985)
+      self.p_sell = "%.2f" % (float(self.p_askobj.getAsk()) * 1.015)
 
       super(MyModel, self).setFaultFlag(False)
       super(MyModel, self).setLastUpdatedNow()

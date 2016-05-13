@@ -49,6 +49,7 @@ class MainWindow(QtGui.QWidget):
 
     self.setWindowTitle( 'Rate Board - ' +
                          datetime.datetime.now().strftime("%d %b %H:%M") )
+    self.setWindowIcon( QtGui.QIcon(os.getcwd() + "/img/my.png") )
 
     van = ClockBoardlet(self, 'Vancouver')
     nyt = ClockBoardlet(self, 'New York')
