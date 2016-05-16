@@ -38,14 +38,30 @@ class GoldTicker(Boardlet):
       return
 
     try:
-      pixmap = QtGui.QPixmap()
-      pixmap.loadFromData( self.p_model.getData() )
-      width = pixmap.width()
-      pixmap = pixmap.copy( 0,0, width, 100 )
+      source = QtGui.QImage()
+      source.loadFromData( self.p_model.getData() )
+      source = source.copy( 0,0, source.width(), 100 )
+
+      # substitute 'black' pixels with transparent
+      dest = QtGui.QImage( source.width(), source.height(),
+                           QtGui.QImage.Format_ARGB32 )
 
       qp = QtGui.QPainter()
+      qp.begin( dest )
+
+      for col in xrange(0, source.width()):
+        for row in xrange(0, source.height()):
+          pel = QtGui.QColor( source.pixel(col, row) )
+          if pel.red() < 10 and pel.green() < 10 and pel.blue() < 10:
+            dest.setPixel( col, row, QtGui.qRgba(0,0,0,0) )
+          else:
+            dest.setPixel( col, row, pel.rgba() )
+      qp.end()
+
+      # draw on screen
+      qp = QtGui.QPainter()
       qp.begin(self)
-      qp.drawPixmap( self.b_col1x(), self.b_imgy(), pixmap )
+      qp.drawImage( self.b_col1x(), self.b_imgy(), dest )
       qp.end()
     except Exception:
       exc_type, exc_value, exc_traceback = sys.exc_info()
