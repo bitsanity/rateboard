@@ -17,3 +17,5 @@ Notes:
 - No guarantees as to the semantic meaning or accuracy of the data pulled from various APIs
 - Expect API providers will to change the APIs and break widgets occasionally (do your own maintenance, contribs welcome)
 - author(s) may change rateboard code in unexpected and temporarily broken ways without warning, notification or contrition
+
+Support a poor programmer: 1JCGwHgWNioGgyA52HFnKNfKBtEux2RSwj
