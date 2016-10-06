@@ -20,6 +20,7 @@ from coinbaseticker import CoinbaseTicker
 from btcchinaticker import BTCChinaTicker
 from bitpayticker import BitpayTicker
 from quadrigaticker import QuadrigaTicker
+from taurusticker import TaurusTicker
 from myticker import MyTicker
 
 def go():
@@ -71,7 +72,7 @@ class MainWindow(QtGui.QWidget):
     qu_ca = QuadrigaTicker( self, 'CAD' )
     btstmp = BitstampTicker( self )
 
-    cbcad = CoinbaseTicker(self, 'CAD')
+    tacad = TaurusTicker(self, 'CAD')
     cbusd = CoinbaseTicker(self, 'USD')
     cbgbp = CoinbaseTicker(self, 'GBP')
     cbeur = CoinbaseTicker(self, 'EUR')
@@ -90,7 +91,7 @@ class MainWindow(QtGui.QWidget):
       [ van,    nyt,    lot,    frk,    bet    ] ,
       [ usdcad, kr_usd, usdgbp, usdeur, usdcny ] ,
       [ qu_ca,  my_us,  cd_gbp, cd_eur, cd_cny ] ,
-      [ cbcad,  cbusd,  cbgbp,  cbeur,  btcch  ] ,
+      [ tacad,  cbusd,  cbgbp,  cbeur,  btcch  ] ,
       [ krcad,  xauusd, bpgbp,  bpeur,  btstmp ] ]
 
     grid = QtGui.QGridLayout()
