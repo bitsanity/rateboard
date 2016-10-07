@@ -80,7 +80,8 @@ class Taurus(Modellet):
     return self.p_targetCurr
 
   def doRefresh(self):
-    req = 'https://api.taurusexchange.com/ticker'
+    headers = {'User-agent' : 'Mozilla/5.0'}
+    req = urllib2.Request( 'https://api.taurusexchange.com/ticker', None, headers )
 
     try:
       resp = urllib2.urlopen(req).read()
