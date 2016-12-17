@@ -19,6 +19,7 @@ from cexioticker import CEXIOTicker
 from coinbaseticker import CoinbaseTicker
 from btcchinaticker import BTCChinaTicker
 from bitpayticker import BitpayTicker
+from poloniexticker import PoloniexTicker
 from quadrigaticker import QuadrigaTicker
 from taurusticker import TaurusTicker
 from myticker import MyTicker
@@ -73,7 +74,8 @@ class MainWindow(QtGui.QWidget):
     btstmp = BitstampTicker( self )
 
     tacad = TaurusTicker(self, 'CAD')
-    cbusd = CoinbaseTicker(self, 'USD')
+    #cbusd = CoinbaseTicker(self, 'USD')
+    pousd = PoloniexTicker(self, 'USD')
     cbgbp = CoinbaseTicker(self, 'GBP')
     cbeur = CoinbaseTicker(self, 'EUR')
 
@@ -85,13 +87,13 @@ class MainWindow(QtGui.QWidget):
     bpgbp = BitpayTicker(self, 'GBP')
     bpeur = BitpayTicker(self, 'EUR')
 
-    my_us = MyTicker(self, kr_usd.p_model, cbusd.p_model )
+    my_us = MyTicker(self, kr_usd.p_model, kr_usd.p_model )
 
     self.p_boardlets = [ \
       [ van,    nyt,    lot,    frk,    bet    ] ,
       [ usdcad, kr_usd, usdgbp, usdeur, usdcny ] ,
       [ qu_ca,  my_us,  cd_gbp, cd_eur, cd_cny ] ,
-      [ tacad,  cbusd,  cbgbp,  cbeur,  btcch  ] ,
+      [ tacad,  pousd,  cbgbp,  cbeur,  btcch  ] ,
       [ krcad,  xauusd, bpgbp,  bpeur,  btstmp ] ]
 
     grid = QtGui.QGridLayout()
