@@ -84,7 +84,7 @@ class Coinbase(Modellet):
 
     try:
       resp = urllib2.urlopen(req).read()
-      #resp = '{"sequence":224989842,"bids":[["228.09","3.017",1]],"asks":[["228.13","0.01",1]]}'
+      #resp = '{"sequence":224989842,"bids":[["000.00","3.017",1]],"asks":[["000.00","0.01",1]]}'
 
       self.p_bestBid = json.loads(resp)['bids'][0][0]
       self.p_bestAsk = json.loads(resp)['asks'][0][0]

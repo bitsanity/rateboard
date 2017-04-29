@@ -43,9 +43,9 @@ class TaurusTicker(Boardlet):
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
     qp.drawText( self.b_col1x(), self.b_row2y() - 5,
-                 'bid: ' + self.p_model.getBestBid() )
+                 'bid: ' + str(self.p_model.getBestBid()) )
     qp.drawText( self.b_col1x(), self.b_row3y() - 5,
-                 'ask: ' + self.p_model.getBestAsk() )
+                 'ask: ' + str(self.p_model.getBestAsk()) )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )

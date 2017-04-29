@@ -73,9 +73,6 @@ class Bittrex(Modellet):
   def getBestAsk(self):
     return self.p_bestAsk
 
-  def getAsk(self):
-    return self.p_bestAsk
-
   def getTargetCurr(self):
     return self.p_targetCurr
 
@@ -85,8 +82,8 @@ class Bittrex(Modellet):
 
     try:
       resp = urllib2.urlopen(req).read()
-      self.p_bestBid = json.loads(resp)['result']['Bid']
-      self.p_bestAsk = json.loads(resp)['result']['Ask']
+      self.p_bestBid = str( json.loads(resp)['result']['Bid'] )
+      self.p_bestAsk = str( json.loads(resp)['result']['Ask'] )
       super(Bittrex, self).setFaultFlag(False)
       super(Bittrex, self).setLastUpdatedNow()
     except Exception:
