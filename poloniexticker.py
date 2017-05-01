@@ -37,15 +37,14 @@ class PoloniexTicker(Boardlet):
     qp.begin(self)
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col1x(), self.b_row1y(),
-                 'Poloniex BTC' + self.p_model.getTargetCurr() )
+    qp.drawText( self.b_col1x(), self.b_row1y(), 'Poloniex BTCUSDT' )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
     qp.drawText( self.b_col1x(), self.b_row2y() - 5,
-                 'bid: ' + self.p_model.getBestBid() )
+                 'bid: ' + "{:09.4f}".format(self.p_model.getBestBid()) )
     qp.drawText( self.b_col1x(), self.b_row3y() - 5,
-                 'ask: ' + self.p_model.getBestAsk() )
+                 'ask: ' + "{:09.4f}".format(self.p_model.getBestAsk()) )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )
@@ -64,14 +63,14 @@ class Poloniex(Modellet):
   def __init__(self, targetCurr='CAD'):
     self.p_targetCurr = targetCurr
     self.p_refreshTime = None
-    self.p_bestBid = '000.00'
-    self.p_bestAsk = '000.00'
+    self.p_bestBid = '0000.0000'
+    self.p_bestAsk = '0000.0000'
 
   def getBestBid(self):
-    return self.p_bestBid
+    return float(self.p_bestBid)
 
   def getBestAsk(self):
-    return self.p_bestAsk
+    return float(self.p_bestAsk)
 
   def getAsk(self):
     return self.p_bestAsk

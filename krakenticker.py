@@ -44,9 +44,9 @@ class KrakenTicker(Boardlet):
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
     qp.drawText( self.b_col1x(), self.b_row2y() - 5,
-                 'bid: ' + self.p_model.getBid() )
+                 'bid: ' + "{:09.4f}".format(self.p_model.getBid()) )
     qp.drawText( self.b_col1x(), self.b_row3y() - 5,
-                 'ask: ' + self.p_model.getAsk() )
+                 'ask: ' + "{:09.4f}".format(self.p_model.getAsk()) )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )
@@ -78,10 +78,10 @@ class KrakenRatesModellet(Modellet):
     self.p_lastTrade = '000.00'
 
   def getAsk(self):
-    return self.p_ask
+    return float(self.p_ask)
 
   def getBid(self):
-    return self.p_bid
+    return float(self.p_bid)
 
   def getOpeningPrice(self):
     return self.p_openingPrice

@@ -45,7 +45,7 @@ class BitstampTicker(Boardlet):
     qp.drawText( self.b_col1x(), self.b_row2y() - 5, 'BTC:' )
     qp.drawText( self.b_col1x(), self.b_row3y() - 5, 'EUR:' )
 
-    qp.setFont( self.p_normFont )
+    qp.setFont( self.p_pairFont )
     qp.drawText( self.b_col2x() - 45, self.b_row2y() - 5,
                  self.p_model.getBid() + '/' + self.p_model.getAsk() )
     qp.drawText( self.b_col2x() - 45, self.b_row3y() - 5,
