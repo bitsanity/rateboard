@@ -43,15 +43,15 @@ class CoindeskBPITicker(Boardlet):
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
     qp.drawText( self.b_col1x(), self.b_row2y() - 5,
-                 self.p_model.getTargetPrice() )
+                 "{:07.2f}".format(self.p_model.getTargetPrice()) )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col2x(), self.b_row2y() - 5,
+    qp.drawText( self.b_col2x() - 20, self.b_row2y() - 5,
                  self.p_model.getTargetCurr() )
     qp.setFont( self.p_normFont )
     qp.drawText( self.b_col1x(), self.b_row3y() - 5,
-                 self.p_model.getUSDPrice() )
+                 "{:07.2f}".format(self.p_model.getUSDPrice()) )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col2x(), self.b_row3y() - 5, 'USD' )
+    qp.drawText( self.b_col2x() - 20, self.b_row3y() - 5, 'USD' )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )
@@ -70,17 +70,17 @@ class CoindeskBPI(Modellet):
   def __init__(self, targetCurr='EUR'):
     self.p_targetCurr = targetCurr
     self.p_refreshTime = None
-    self.p_usdPrice = '000.0000'
-    self.p_targetPrice = '000.0000'
+    self.p_usdPrice = '0,000.00'
+    self.p_targetPrice = '0,000.00'
 
   def getTargetPrice(self):
-    return self.p_targetPrice
+    return float(self.p_targetPrice.replace(',',''))
 
   def getTargetCurr(self):
     return self.p_targetCurr
 
   def getUSDPrice(self):
-    return self.p_usdPrice
+    return float(self.p_usdPrice.replace(',',''))
 
   def doRefresh(self):
     req = 'http://api.coindesk.com/v1/bpi/currentprice/' + self.p_targetCurr + '.json'
