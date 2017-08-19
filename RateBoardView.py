@@ -26,6 +26,7 @@ from poloniexticker import PoloniexTicker
 from quadrigaticker import QuadrigaTicker
 from taurusticker import TaurusTicker
 from myticker import MyTicker
+from southxticker import SouthxTicker
 
 def go():
   app = QtGui.QApplication(sys.argv)
@@ -73,7 +74,8 @@ class MainWindow(QtGui.QWidget):
 
     kr_usd = KrakenTicker(self, 'USD')
     qu_ca = QuadrigaTicker( self, 'CAD' )
-    btstmp = BitstampTicker( self )
+    #btstmp = BitstampTicker( self )
+    bchusd = SouthxTicker( self, 'USD' )
 
     #tacad = TaurusTicker(self, 'CAD')
     pousd = PoloniexTicker(self, 'USD')
@@ -97,7 +99,7 @@ class MainWindow(QtGui.QWidget):
       [ usdcad, kr_usd, usdgbp, usdeur, usdcny ] ,
       [ qu_ca,  my_us,  cd_gbp, cd_eur, cd_cny ] ,
       [ dashus, pousd,  xmr_us, eth_us, btcch  ] ,
-      [ krcad,  xauusd, bpgbp,  bpeur,  btstmp ] ]
+      [ krcad,  xauusd, bpgbp,  bpeur,  bchusd ] ]
 
     grid = QtGui.QGridLayout()
 

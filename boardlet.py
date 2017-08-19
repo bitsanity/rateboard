@@ -14,7 +14,7 @@ class Boardlet(QtGui.QWidget):
     self.p_redPen = QtGui.QPen( QtCore.Qt.red, 1, QtCore.Qt.SolidLine )
     self.p_pairFont = QtGui.QFont('Helvetica', 12, QtGui.QFont.Bold)
     self.p_normFont = QtGui.QFont('Helvetica', 14, QtGui.QFont.Bold)
-    self.p_rateFont = QtGui.QFont('Helvetica', 24, QtGui.QFont.Bold)
+    self.p_rateFont = QtGui.QFont('Helvetica', 20, QtGui.QFont.Bold)
     self.p_timeFont = QtGui.QFont('Helvetica', 8)
     self.initUI()
 

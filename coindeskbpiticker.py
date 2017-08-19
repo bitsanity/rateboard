@@ -43,15 +43,15 @@ class CoindeskBPITicker(Boardlet):
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_normFont )
     qp.drawText( self.b_col1x(), self.b_row2y() - 5,
-                 "{:07.2f}".format(self.p_model.getTargetPrice()) )
+                 "{:08.2f}".format(self.p_model.getTargetPrice()) )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col2x() - 20, self.b_row2y() - 5,
+    qp.drawText( self.b_col2x() + 20, self.b_row2y() - 5,
                  self.p_model.getTargetCurr() )
     qp.setFont( self.p_normFont )
     qp.drawText( self.b_col1x(), self.b_row3y() - 5,
-                 "{:07.2f}".format(self.p_model.getUSDPrice()) )
+                 "{:08.2f}".format(self.p_model.getUSDPrice()) )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col2x() - 20, self.b_row3y() - 5, 'USD' )
+    qp.drawText( self.b_col2x() + 20, self.b_row3y() - 5, 'USD' )
 
     qp.setFont( self.p_timeFont )
     qp.setPen( self.p_grayPen )
