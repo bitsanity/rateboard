@@ -63,10 +63,10 @@ class MainWindow(QtGui.QWidget):
     bet = ClockBoardlet(self, 'Beijing')
     frk = ClockBoardlet(self, 'Frankfurt')
 
-    usdcad = ForexTicker(self, 'USDCAD')
-    usdeur = ForexTicker(self, 'USDEUR')
-    usdgbp = ForexTicker(self, 'USDGBP')
-    usdcny = ForexTicker(self, 'USDCNY')
+    usdcad = ForexTicker(self, 'CAD')
+    usdeur = ForexTicker(self, 'EUR')
+    usdgbp = ForexTicker(self, 'GBP')
+    usdcny = ForexTicker(self, 'CNY')
 
     cd_eur = CoindeskBPITicker(self, 'EUR')
     cd_gbp = CoindeskBPITicker(self, 'GBP')
@@ -84,7 +84,7 @@ class MainWindow(QtGui.QWidget):
     xmr_us = MoneroTicker(self, kr_usd)
     eth_us = EthereumTicker(self, kr_usd)
 
-    btcch = BTCChinaTicker(self)
+    #btcch = BTCChinaTicker(self)
 
     krcad = KrakenTicker(self, 'CAD')
 
@@ -98,7 +98,7 @@ class MainWindow(QtGui.QWidget):
       [ van,    nyt,    lot,    frk,    bet    ] ,
       [ usdcad, kr_usd, usdgbp, usdeur, usdcny ] ,
       [ qu_ca,  my_us,  cd_gbp, cd_eur, cd_cny ] ,
-      [ dashus, pousd,  xmr_us, eth_us, btcch  ] ,
+      [ dashus, pousd,  xmr_us, eth_us, None  ] ,
       [ krcad,  xauusd, bpgbp,  bpeur,  bchusd ] ]
 
     grid = QtGui.QGridLayout()

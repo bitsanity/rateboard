@@ -3,6 +3,7 @@
 
 import os
 import csv
+import simplejson as json
 import sys, traceback
 import threading
 import time
@@ -14,9 +15,9 @@ from boardlet import Boardlet
 from modellet import Modellet
 
 class ForexTicker(Boardlet):
-  def __init__(self, parent, currPair):
+  def __init__(self, parent, curr):
     super(ForexTicker, self).__init__(parent)
-    self.p_model = ForexRate( currPair )
+    self.p_model = ForexRate( curr )
     self.fubar()
 
   def fubar(self):
@@ -26,13 +27,13 @@ class ForexTicker(Boardlet):
     self.p_icon.setGeometry( self.b_imgx(), self.b_imgy(),
                              self.b_iconwidth(),self.b_iconheight() )
 
-    if 'CAD' in self.p_model.getCurrPair():
+    if 'CAD' in self.p_model.getCurr():
       self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/cad.png' ) )
-    elif 'GBP' in self.p_model.getCurrPair():
+    elif 'GBP' in self.p_model.getCurr():
       self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/gbp.png' ) )
-    elif 'EUR' in self.p_model.getCurrPair():
+    elif 'EUR' in self.p_model.getCurr():
       self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/eur.png' ) )
-    elif 'CNY' in self.p_model.getCurrPair():
+    elif 'CNY' in self.p_model.getCurr():
       self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/cny.png' ) )
     else:
       self.p_icon.setPixmap( QtGui.QPixmap(os.getcwd() + '/img/globe.png' ) )
@@ -49,14 +50,15 @@ class ForexTicker(Boardlet):
 
     qp.setPen( self.p_grayPen )
     qp.setFont( self.p_pairFont )
-    qp.drawText( self.b_col1x(), self.b_row1y(), self.p_model.getCurrPair() )
+    qp.drawText( self.b_col1x(), self.b_row1y(),
+                 'USD' + self.p_model.getCurr() )
     qp.drawText( self.b_col2x() + 15, self.b_row1y(), 'Inverse' )
 
     qp.setPen( self.p_whitePen )
     qp.setFont( self.p_rateFont )
 
     rt = self.p_model.getRate()
-    qp.drawText( self.b_col1x(), self.b_row2y(), rt )
+    qp.drawText( self.b_col1x(), self.b_row2y(), '' + rt )
 
     qp.setFont( self.p_pairFont )
     qp.drawText( self.b_col2x() + 15, self.b_row2y(), self.inverseOf(rt) )
@@ -82,10 +84,10 @@ class ForexTicker(Boardlet):
       self.p_model.doRefresh()
 
 class ForexRate(Modellet):
-  def __init__(self, currPair=None):  # e.g. 'USDEUR'
+  def __init__(self, curr=None):  # e.g. 'USDEUR'
     super(ForexRate, self).__init__()
 
-    self.p_currPair = currPair
+    self.p_curr = curr
     self.p_rate = '0.0000'
     self.p_change = '+00.00%'
 
@@ -95,19 +97,15 @@ class ForexRate(Modellet):
   def getChange(self):
     return self.p_change
 
-  def getCurrPair(self):
-    return self.p_currPair
+  def getCurr(self):
+    return self.p_curr
 
   def doRefresh(self):
-    # f param: s = symbol, l1 = last trade, c1 = change
-    req = 'http://finance.yahoo.com/d/quotes.csv?s=' + self.p_currPair + '=X&f=sl1c1'
+    req = 'https://api.fixer.io/latest?base=USD'
 
     try:
-      resp = urllib2.urlopen(req)
-      cr = csv.reader(resp)
-      for row in cr:
-        self.p_rate = row[1]
-        self.p_change = row[2]
+      resp = urllib2.urlopen(req).read()
+      self.p_rate = '%.4f' % json.loads(resp)['rates'][self.p_curr]
 
       super(ForexRate, self).setFaultFlag(False)
       super(ForexRate, self).setLastUpdatedNow()
