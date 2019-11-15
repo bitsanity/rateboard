@@ -19,4 +19,3 @@ Notes:
 - Expect API providers will to change the APIs and break widgets occasionally (do your own maintenance, contribs welcome)
 - author(s) may change rateboard code in unexpected and temporarily broken ways without warning, notification or contrition
 
-Donations: 1JCGwHgWNioGgyA52HFnKNfKBtEux2RSwj
